@@ -1,5 +1,5 @@
 <html>
-	<head>
+	<head style=" height:1080px; width: 1920px;">
 		<script src="OpenLayers.js"></script>
 		<meta name="mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-capable" content="yes">
@@ -52,14 +52,14 @@
 		 
 	</head>
 	<body style="background-color: limegreen; margin: 0; height:1080px; width: 1920px;">
-		<div id="mapdiv" style =" position: absolute; height:200px; width:200px; z-index: 1; right: 0; "> </div>
+		<div id="mapdiv" style =" position: absolute; height:200px; width:200px; z-index: 1; left: 1580px; margin:50; "> </div>
 		<video style =" position: absolute;"autoplay="true" id="videoElement">
 	
 		</video>
 		<div id="select" style="position: absolute;">
 			<button onclick="ui_connect()">Select Ninebot</button>
 		</div>
-
+		
 		<div id="menu" style="display: none;">
 			Offset: <input id="offset" type="text" value="0x22" /><br />
 			Size: <input  id="size" type="number" value="2" /><br />
