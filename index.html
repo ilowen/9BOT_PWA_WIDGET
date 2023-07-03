@@ -255,7 +255,7 @@
 				var circle = new OpenLayers.Feature.Vector(
 					OpenLayers.Geometry.Polygon.createRegularPolygon(
 						new OpenLayers.Geometry.Point(e.point.x, e.point.y),
-						(((20*(speedV/22))||1))*e.position.coords.accuracy/2,
+						(((20*(speedV/22))||1))*e.position.coords.accuracy/4,
 						40,
 						0
 					),
