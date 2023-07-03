@@ -95,7 +95,7 @@
 		</p>
 		<p>
 
-			<div id="arc" onclick="ui_connect()"><div id="arcL"></div><p id="speed" style="text-align: center;    font-weight: 800;
+			<div id="arc" onclick="ui_turn()"><div id="arcL"></div><p id="speed" style="text-align: center;    font-weight: 800;
 			color: black; text-shadow:0 0 10px white; font-size: 45px; margin-top: 60px;">0 km/h</p></div>
 			
 		</p>
@@ -107,6 +107,7 @@
 			var  _interval = null;
 			var arc = document.getElementById('arcL');
 			var speed = document.getElementById('speed');
+			var connected = false;
 			var funcs = (function() {
 
 				var device_select = document.getElementById("select");
@@ -143,7 +144,7 @@
 
 							//device_select.style = "display: none;";
 							//device_menu.style = "";
-							
+							connected = true;
 							 _interval = setInterval(async (a)=> {
 								let res = await read_register(0x26,1);
 								  arc.style.transform= `rotate(${-180+180*res/25000}deg)`;
@@ -163,6 +164,7 @@
 					//device_menu.style = "display: none;";
 					//device_select.style = "";
 					clearInterval(_interval)
+					connected =false;
 				}
 
 				function read()
@@ -190,6 +192,13 @@
 			var ui_disconnect = funcs.disconnect;
 			var ui_read_register = funcs.read;
 			var ui_write_register = funcs.write;
+			var ui_turn = function tuggle()  {
+				
+				if(connected)
+					ui_disconnect()
+				else
+					ui_connect()
+			}
 			window.matchMedia(
 				'(display-mode: standalone)'
 				).matches
