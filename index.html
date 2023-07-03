@@ -1,5 +1,6 @@
 <html>
 	<head>
+		<link rel="manifest" href="manifest.json" />
 		<style>
 			#arc,
 			#arcL {
@@ -84,6 +85,7 @@
 
 		<script type="text/javascript" src="9BotONE.js"></script>
 		<script type="text/javascript">
+			
 			var  _interval = null;
 			var arc = document.getElementById('arcL');
 			var speed = document.getElementById('speed');
@@ -135,6 +137,7 @@
 						.catch(handleErr);
 				}
 
+				
 				function disconnect()
 				{
 					device.disconnect();
@@ -168,7 +171,6 @@
 			var ui_disconnect = funcs.disconnect;
 			var ui_read_register = funcs.read;
 			var ui_write_register = funcs.write;
-
 		</script>
 	</body>
 </html>
