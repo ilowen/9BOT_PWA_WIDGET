@@ -14,8 +14,8 @@
 			display: block;
 			box-sizing: border-box;
 			border-radius: 100%;
-			width: 200px;
-			height: 200px;
+			width: 300px;
+			height: 300px;
 			position: absolute;
 			background-color: transparent;
 			padding: 0;
@@ -24,8 +24,9 @@
 
 			#arc {
 			border: solid #909090 24px;
-			clip: rect(0px, 200px, 100px, 0px);
+			clip: rect(0px, 300px, 150px, 0px);
 			margin: 50px;
+			top: 830px;
 			}
 
 			#arcL {
@@ -33,7 +34,7 @@
 			border: solid #EEBB00 24px;
 			top: -24px;
    			left: -24px;
-			clip: rect(0px, 200px, 100px, 0px);
+			clip: rect(0px, 300px, 150px, 0px);
 			transform: rotate(-90deg);
 			/* define the fill length, using the rotation above.
 				from -180deg (0% fill) to 0deg (100% fill) */
@@ -52,7 +53,7 @@
 		 
 	</head>
 	<body style="background-color: limegreen; margin: 0; height:1080px; width: 1920px;">
-		<div id="mapdiv" style =" position: absolute; height:200px; width:200px; z-index: 1; left: 1580px; margin:50; "> </div>
+		<div id="mapdiv" style =" position: absolute; height:300px; width:300px; z-index: 1; left: 1520px; margin:50;     top: 680px; "> </div>
 		<video style =" position: absolute;"autoplay="true" id="videoElement">
 	
 		</video>
@@ -95,7 +96,7 @@
 		<p>
 
 			<div id="arc" onclick="ui_connect()"><div id="arcL"></div><p id="speed" style="text-align: center;    font-weight: 800;
-			color: darkslategray; text-shadow:0 0 10px white; font-size: 30px; margin-top: 43px;">0 km/h</p></div>
+			color: black; text-shadow:0 0 10px white; font-size: 45px; margin-top: 60px;">0 km/h</p></div>
 			
 		</p>
 	
