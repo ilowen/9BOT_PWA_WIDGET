@@ -146,7 +146,7 @@
 							//device_menu.style = "";
 							connected = true;
 							 _interval = setInterval(async (a)=> {
-								let res = await read_register(0x26,1);
+								let res = await read_register(0x26,2);
 								  arc.style.transform= `rotate(${-180+180*res/25000}deg)`;
 								  speedV = parseInt(res/100)
 								  speed.innerHTML = `${parseInt(res/10)/100} km/h`;	
