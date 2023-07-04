@@ -175,14 +175,13 @@
 							connected = true;
 							 _interval = setInterval(async (a)=> {
 								let res = await read_register(0x26,2);
+
+								
 								  arcL.style.transform= `rotate(${-180+180*res/25000}deg)`;
 								  speedV = parseInt(res/100)
-								  speed.innerHTML = `${parseInt(res/10)/100} km/h`;	
-								  
+								  speed.innerHTML = `${parseInt(res/10)/100} km/h`;	 
 								  let power =1-(res/25000);
-								  
 								  let color = getColorForPercentage(power);
-								
 								  arc.style['box-shadow']  = `${color} 0px 0px 50px ${parseInt(25*(power))}px`;
 								  arcL.style['border-color'] = color;
 
@@ -321,8 +320,9 @@
 					),
 					circle
 				]);
+				map.zoomToExtent(vector.getDataExtent());
 				if (firstGeolocation) {
-					map.zoomToExtent(vector.getDataExtent());
+					
 				
 					firstGeolocation = false;
 					this.bind = true;
