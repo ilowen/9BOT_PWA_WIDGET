@@ -24,7 +24,8 @@
 
 			#arc {
 			border: solid #909090 24px;
-			clip: rect(0px, 300px, 150px, 0px);
+			clip:rect(-100px, 400px, 150px, -100px);
+			
 			margin: 50px;
 			top: 830px;
 			}
@@ -95,17 +96,43 @@
 		</p>
 		<p>
 
-			<div id="arc" onclick="ui_turn()"><div id="arcL"></div><p id="speed" style="text-align: center;    font-weight: 800;
-			color: black; text-shadow:0 0 10px white; font-size: 45px; margin-top: 60px;">0 km/h</p></div>
+			<div id="arc" onclick="ui_turn()" style="box-shadow: 0 0 50px 15px #EEBB00;"><div id="arcL"></div><p id="speed" style="text-align: center;    font-weight: 800;
+			color: black;  font-size: 45px; margin-top: 60px; background-image: conic-gradient(#ff0073, #fe9d00); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">0 km/h</p></div>
 			
 		</p>
 	
 
 		<script type="text/javascript" src="9BotONE.js"></script>
 		<script type="text/javascript">
+			var percentColors = [
+				{ pct: 0.0, color: { r: 0xff, g: 0x00, b: 0 } },
+				{ pct: 0.5, color: { r: 0xff, g: 0xff, b: 0 } },
+				{ pct: 1.0, color: { r: 0x00, g: 0xff, b: 0 } } ];
+
+			var getColorForPercentage = function(pct) {
+				for (var i = 1; i < percentColors.length - 1; i++) {
+					if (pct < percentColors[i].pct) {
+						break;
+					}
+				}
+				var lower = percentColors[i - 1];
+				var upper = percentColors[i];
+				var range = upper.pct - lower.pct;
+				var rangePct = (pct - lower.pct) / range;
+				var pctLower = 1 - rangePct;
+				var pctUpper = rangePct;
+				var color = {
+					r: Math.floor(lower.color.r * pctLower + upper.color.r * pctUpper),
+					g: Math.floor(lower.color.g * pctLower + upper.color.g * pctUpper),
+					b: Math.floor(lower.color.b * pctLower + upper.color.b * pctUpper)
+				};
+				return 'rgb(' + [color.r, color.g, color.b].join(',') + ')';
+				// or output as hex if preferred
+			};
 			var speedV = 22;
 			var  _interval = null;
-			var arc = document.getElementById('arcL');
+			var arcL =document.getElementById("arcL");
+			var arc =document.getElementById("arc");
 			var speed = document.getElementById('speed');
 			var connected = false;
 			var funcs = (function() {
@@ -117,6 +144,7 @@
 				var value = document.getElementById("value");
 				var sent = document.getElementById("Sent");
 				var recv = document.getElementById("Recv");
+				
 				
 				function getValue(element)
 				{
@@ -147,11 +175,18 @@
 							connected = true;
 							 _interval = setInterval(async (a)=> {
 								let res = await read_register(0x26,2);
-								  arc.style.transform= `rotate(${-180+180*res/25000}deg)`;
+								  arcL.style.transform= `rotate(${-180+180*res/25000}deg)`;
 								  speedV = parseInt(res/100)
 								  speed.innerHTML = `${parseInt(res/10)/100} km/h`;	
+								  
+								  let power = !res||(1-25/parseInt(res/10)/100);
+								  let color = getColorForPercentage(power);
+								
+								  arc.style['box-shadow']  = `${color} 0px 0px 50px ${parseInt(25*(power))}px`;
+								  arcL.style['border-color'] = color;
+
 								},250)
-							 
+								
 
 						})
 						.catch(handleErr);
