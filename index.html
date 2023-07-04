@@ -179,7 +179,8 @@
 								  speedV = parseInt(res/100)
 								  speed.innerHTML = `${parseInt(res/10)/100} km/h`;	
 								  
-								  let power = !res||(1-25/parseInt(res/10)/100);
+								  let power =1-(res/25000);
+								  
 								  let color = getColorForPercentage(power);
 								
 								  arc.style['box-shadow']  = `${color} 0px 0px 50px ${parseInt(25*(power))}px`;
